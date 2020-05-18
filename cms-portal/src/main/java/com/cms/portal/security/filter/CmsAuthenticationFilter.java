@@ -1,5 +1,6 @@
 package com.cms.portal.security.filter;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 import javax.servlet.ServletRequest;
@@ -27,8 +28,8 @@ public class CmsAuthenticationFilter extends FormAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         response.setCharacterEncoding(ENCODED);
         response.setContentType(JSONENCODED);
-
-
-        return true;
+        response.getWriter().write(JSON.toJSONString("验证码错误!"));
+        /*因为登录是get请求,ajax是post*/
+        return false;
     }
 }
