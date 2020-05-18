@@ -18,6 +18,10 @@ public class UsernamePasswordCaptchaRealm extends AuthorizingRealm {
     //建权
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
+
+
+
         return null;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 @Slf4j
 public class CmsViewResolver extends FreeMarkerView {
 
-    private static final String admin_path="/admin/cms";
+    private static final String ADMIN_PATH="/admin/cms";
 
 
     @Override
@@ -28,13 +28,13 @@ public class CmsViewResolver extends FreeMarkerView {
         final String servletPath = request.getServletPath();
 
         //判断是包含后台路径
-        if (requestURI.contains(admin_path)) {
+        if (requestURI.contains(ADMIN_PATH)) {
 
             model.put("basePath",contextPath);
 
         }
 
-
+        //访问前台路径 /admin/cms/
         model.put("adminPath",contextPath+servletPath);
 
 
