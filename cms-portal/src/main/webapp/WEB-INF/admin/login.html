@@ -151,13 +151,9 @@
 <script src="${basePath}/common/js/jq.js" charset="utf-8"></script>
 <script src="${basePath}/admin/layui/layui.js" charset="utf-8"></script>
 <script src="${basePath}/admin/js/jquery.particleground.min.js" charset="utf-8"></script>
+<script src="${basePath}/admin/js/core.js" charset="utf-8"></script>
 <script>
-    layui.use(['form'], function () {
-        var form = layui.form,
-            layer = layui.layer;
 
-        // 登录过期的时候，跳出ifram框架
-        if (top.location != self.location) top.location = self.location;
 
         // 粒子线条背景
         $(document).ready(function () {
@@ -166,42 +162,13 @@
                 lineColor: '#5cbdaa'
             });
         });
-
-        let core = {
-            //自己封装的ajax
-            http: function (option) {
-                //需要时候自己封装
-                let opt={},options = {
-                    url: "",
-                    method: "post",
-                    //请求类型
-                    contentType: "application/x-www-form-urlencoded",
-                    //数据类型
-                    dataType:"json",
-                    success:function (res) {
-                        if(res==="验证码错误!"){
-                            //alert("验证码错误!");
-                            console.log("验证码错误!");
-
-                        }
-                    }
-                };
-
-            // 把相同的值覆盖掉，保持option的动态值  ***新增特性
-            Object.assign(opt,options,option);
-            $.ajax(opt);
-            }
-        };
-
-        //监听提交
-        form.on('submit(login)', function () {
+            //自己封装好的js调用
             core.http({
-                    url: "${adminPath}/login.do",
+                   url: "${adminPath}/login.do",
                     data: {}
-            });
-            return false;
-        });
-    });
+                });
+
+
 </script>
 </body>
 </html>
