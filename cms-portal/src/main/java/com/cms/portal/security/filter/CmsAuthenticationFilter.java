@@ -27,6 +27,9 @@ public class CmsAuthenticationFilter extends FormAuthenticationFilter {
     /*重写验证*/
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
+
+        //延迟请求
+        Thread.sleep(3000);
         response.setCharacterEncoding(ENCODED);
         response.setContentType(JSONENCODED);
                                                     //类调用封装好的方法

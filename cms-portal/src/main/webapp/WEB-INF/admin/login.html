@@ -162,11 +162,26 @@
                 lineColor: '#5cbdaa'
             });
         });
-            //自己封装好的js调用
-            core.http({
-                   url: "${adminPath}/login.do",
-                    data: {}
+        layui.use(['form','layer'], function(){
+            let form = layui.form,layer=layui.layer;
+
+
+            //监听提交
+            form.on('submit(login)', function(data){
+
+                core.throttle(submit,{id:1});
+
+                return false;
+            });
+
+            function  submit(data) {
+                core.http({
+                    url:"${adminPath}/login.do",
+                    data:data
                 });
+            }
+
+        });
 
 
 </script>
