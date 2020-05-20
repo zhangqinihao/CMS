@@ -2,6 +2,7 @@ package com.cms.portal.controller.admin;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
+import com.cms.service.api.CommonService;
 import com.google.code.kaptcha.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,43 +27,42 @@ public class LoginController {
     @Autowired
     private Producer captchaProducer;
 
+    @Autowired
+    private CommonService commonService;
+
+
+
 
     @GetMapping("login.do")
     public String toLogin() {
         return "/admin/login";
     }
 
-   /* @GetMapping("captcha.do")
-    public void doCaptcha(HttpServletResponse httpServletResponse){
-        String text = captchaProducer.createText();
-        BufferedImage image = captchaProducer.createImage(text);
-        try(ServletOutputStream outputStream = httpServletResponse.getOutputStream()){
-            ImageIO.write(image,"jpg",outputStream);
-        }catch (IOException e){
-            log.error("验证码生成失败");
-        }
-*/
+    @GetMapping("captcha.do")
+    public void doCaptcha() {
+        commonService.imageCapcha();
+    }
 
         /*Hutool方式*/
-    @GetMapping("captcha.do")
-    public  void doCaptcha(HttpServletResponse httpServletResponse) throws IOException {
-        //hutool
-        //定义图形验证码的长和宽
-        //干扰验证码
-        CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(116, 36, 5, 5);
-        //获取验证码
-        //String code = captcha.getCode();
-        //  System.out.println(code);
-        //放进session
-        //  session.setAttribute("code",code);
-
-       
-        //用流把验证码写出去
-        ServletOutputStream outputStream = httpServletResponse.getOutputStream();
-        captcha.write(outputStream);
-        //写完关流
-        outputStream.close();
-    }
+//    @GetMapping("captcha.do")
+//    public  void doCaptcha(HttpServletResponse httpServletResponse) throws IOException {
+//        //hutool
+//        //定义图形验证码的长和宽
+//        //干扰验证码
+//        CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(116, 36, 5, 5);
+//        //获取验证码
+//        //String code = captcha.getCode();
+//        //  System.out.println(code);
+//        //放进session
+//        //  session.setAttribute("code",code);
+//
+//
+//        //用流把验证码写出去
+//        ServletOutputStream outputStream = httpServletResponse.getOutputStream();
+//        captcha.write(outputStream);
+//        //写完关流
+//        outputStream.close();
+//    }
 
 
 }
