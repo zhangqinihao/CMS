@@ -53,9 +53,7 @@ let core = {
 
 //layui工具类  名称不能改变
 function LayUtil() {
-    this.run=function () {
 
-    }
 }
 
 //原型骨架
@@ -93,6 +91,50 @@ LayUtil.prototype={
 
             LayUtil.layer=new Inner();
 
-        })(LayUtil)
+        })(LayUtil),
+    //form表单
+    form:(function (LayUtil) {
+        function Inner() {
+
+        }
+        Inner.prototype={
+            construct:Inner,
+            init:function (callback) {
+                let  that=this;
+                layui.use('form',function () {
+                    that.form=layui.form;
+                    that.form.render();
+                    if(callback instanceof Function){
+                        callback(that,that.form);
+                    }
+                });
+                return this;
+            },
+
+            //提交表单
+            submit:function(callback,name,type="submit"){
+                this.form.on(type+"("+(name===undefined?'go':name)+")",function (obj) {
+                       if(callback instanceof  Function){
+
+                           callback(obj);
+                           return false;
+                       }
+
+                       return  true;
+                })
+
+            },
+
+            //验证
+            verify:function (validator) {
+                this.form.verify(validator)
+            }
+
+        }
+        LayUtil.form=new Inner();
+
+    })(LayUtil)
 
 }
+
+
