@@ -2,10 +2,14 @@ package com.cms.portal.security.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.cms.context.foundation.Result;
+import com.cms.service.api.CommonService;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import java.util.Objects;
 
 public class CmsAuthenticationFilter extends FormAuthenticationFilter {
 
@@ -15,6 +19,10 @@ public class CmsAuthenticationFilter extends FormAuthenticationFilter {
     private static final String ENCODED = "utf-8";
     //默认响应类型
     private static  final  String JSONENCODED="application/json;charset=UTF-8";
+
+
+    @Autowired
+    private CommonService commonService;
 
 
     /*重写登录*/
@@ -32,7 +40,16 @@ public class CmsAuthenticationFilter extends FormAuthenticationFilter {
         Thread.sleep(3000);
         response.setCharacterEncoding(ENCODED);
         response.setContentType(JSONENCODED);
-                                                    //类调用封装好的方法
+        String captcha = commonService.verifyimageCapcha(WebUtils.getCleanParam(request, "captcha"));
+
+        if(Objects.nonNull(captcha)){
+
+            response.getWriter().write(JSON.toJSONString( Result.success(captcha)));
+            return false;
+        }
+
+
+        //类调用封装好的方法
         response.getWriter().write(JSON.toJSONString( Result.success("登录成功!")));
 
 

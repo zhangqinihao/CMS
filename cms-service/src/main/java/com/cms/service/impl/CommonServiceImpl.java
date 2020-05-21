@@ -5,6 +5,7 @@ import com.cms.context.utils.UtilsShiro;
 import com.cms.service.api.CommonService;
 import com.google.code.kaptcha.Producer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -20,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class CommonServiceImpl implements CommonService {
 
 
-    private static String IMAGE_CAPTCHA_SUFFIX = "image_captcha";
+    private static  final  String IMAGE_CAPTCHA_SUFFIX = "image_captcha";
 
     @Autowired
     private Producer captchaProducer;
@@ -62,6 +64,26 @@ public class CommonServiceImpl implements CommonService {
         }
 
 
+    }
+
+    @Override
+    public String verifyimageCapcha(String captcha) {
+
+        String rediscaptcha= redisTemplate.opsForValue().get(UtilsShiro.getsession().getId() + IMAGE_CAPTCHA_SUFFIX);
+        if(Objects.isNull(rediscaptcha)){
+
+
+            return "验证码已失效,请重新输入!";
+        }
+
+        if(!StringUtils.equals(captcha,rediscaptcha)){
+
+            return "验证码错误!";
+
+        }
+
+
+        return null;
     }
 
 

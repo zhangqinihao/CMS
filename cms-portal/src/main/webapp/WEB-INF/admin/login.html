@@ -121,17 +121,17 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-username" for="username"></label>
-                    <input type="text" name="username" lay-verify="username" placeholder="用户名或者邮箱"
+                    <input type="text" name="username" lay-verify="required" placeholder="用户名或者邮箱" value="admin"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password" for="password"></label>
-                    <input type="password" name="password"  placeholder="密码"
+                    <input type="password" name="password"  lay-verify="required"  placeholder="密码" value="a123456"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-vercode" for="captcha"></label>
-                    <input type="text" name="captcha"  placeholder="图形验证码"
+                    <input type="text" name="captcha" lay-verify="required"  placeholder="图形验证码"
                            autocomplete="off" class="layui-input verification captcha">
                     <div class="captcha-img" style="cursor: pointer;">
                         <img id="captchaPic" src="${adminPath}/captcha.do"
@@ -168,7 +168,7 @@
             console.log(inner, form)
             inner.submit(function (data) {
                 console.log(data);
-                core.throttle(submit,{id:1});
+                core.throttle(submit,data.field);
             })
 
         })
