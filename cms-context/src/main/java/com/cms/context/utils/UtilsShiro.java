@@ -2,6 +2,7 @@ package com.cms.context.utils;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 
 public class UtilsShiro {
 
@@ -19,6 +20,14 @@ public class UtilsShiro {
 
     }
 
+    /**
+     * 获取shiro的Subject
+     * @return
+     */
+    public static Subject getSubject(){
+
+        return  SecurityUtils.getSubject();
+    }
 
 
 

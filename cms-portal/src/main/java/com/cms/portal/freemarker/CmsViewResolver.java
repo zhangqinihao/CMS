@@ -30,12 +30,12 @@ public class CmsViewResolver extends FreeMarkerView {
         //判断是包含后台路径
         if (requestURI.contains(ADMIN_PATH)) {
 
-            model.put("basePath",contextPath);
+            //访问前台路径 /admin/cms/
+            model.put("adminPath",contextPath+servletPath);
 
         }
+        model.put("basePath",contextPath);
 
-        //访问前台路径 /admin/cms/
-        model.put("adminPath",contextPath+servletPath);
 
 
 
