@@ -27,12 +27,12 @@
 
     </resultMap>
 
-    <select id="getByUsername" parameterType="string" resultMap="baseResultMap">
+    <select id="getByUsername"  resultMap="baseResultMap">
 
-        select <include refid="baseColumn">
+        select <include refid="baseColumn"/>
 
 
-    </include>   from cms_user_primary where username=#{username}
+        from cms_user_primary where username=#{username}
 
     </select>
 

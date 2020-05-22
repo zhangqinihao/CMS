@@ -67,6 +67,7 @@ public class CmsAuthenticationFilter extends FormAuthenticationFilter {
         AuthenticationToken token=this.createToken(request,response);
 
         try {
+
             subject.login(token);
             response.getWriter().write(JSON.toJSONString( Result.success("登录成功!")));
 
