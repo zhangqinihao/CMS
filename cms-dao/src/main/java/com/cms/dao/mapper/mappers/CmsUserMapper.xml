@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.dao.mapper.CmsUserMapper">
+
+
+    <sql id="baseColumn" >
+        <!--@sql select -->
+        id,
+        username,
+        status
+        <!--@sql from  cms_user_primary-->
+    </sql>
+
+    <resultMap id="baseResultMap" type="com.cms.dao.entity.CmsUserEntity">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+
+        <result property="status" column="status"/>
+
+
+    </resultMap>
+
+    <select id="getByUsername"  resultMap="baseResultMap">
+
+        select <include refid="baseColumn"/>
+
+
+        from cms_user where username=#{username}
+        and deleted=1
+
+    </select>
+
+
+
+
+
+
+</mapper>

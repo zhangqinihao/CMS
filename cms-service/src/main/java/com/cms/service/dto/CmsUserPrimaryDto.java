@@ -1,5 +1,6 @@
 package com.cms.service.dto;
 
+import com.cms.core.foundation.BaseDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,11 +8,9 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class CmsUserPrimaryDto {
+public class CmsUserPrimaryDto extends BaseDto<Integer> {
 
-    private LocalDate createTime;
-    private LocalDate updateTime;
-    private Integer id;
+
     private String username;
     private String password;
     private String salt;
@@ -19,10 +18,6 @@ public class CmsUserPrimaryDto {
     private Integer loginCount;
     private Boolean status;
     private Boolean deleted;
-
-
-
-
 
 
 

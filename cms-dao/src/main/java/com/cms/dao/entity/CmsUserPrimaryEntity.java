@@ -1,12 +1,13 @@
 package com.cms.dao.entity;
 
+import com.cms.core.foundation.BaseDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 @Getter
 @Setter
-public class CmsUserPrimaryEntity {
+public class CmsUserPrimaryEntity extends BaseDto<Integer> {
 
 
     private LocalDate createTime;
@@ -17,8 +18,7 @@ public class CmsUserPrimaryEntity {
     private String salt;
     private String email;
     private Integer loginCount;
-    private Boolean status;
-    private Boolean deleted;
+
 
 
 

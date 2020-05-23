@@ -1,5 +1,6 @@
 package com.cms.service.api;
 
+import com.cms.service.dto.CmsUserDto;
 import com.cms.service.dto.CmsUserPrimaryDto;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,10 @@ public interface CmsUserService {
      * @param username
      * @return
      */
-    CmsUserPrimaryDto selectByUsername(String username);
+    CmsUserDto selectByUsername(String username);
+
+
+
+
 
 }
